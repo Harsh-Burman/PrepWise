@@ -9,7 +9,7 @@ enum CallStatus {
 }
 
 const Agent = ({ userName }: AgentProps) => {
-  const callStatus = CallStatus.FINISHED;
+  const callStatus = CallStatus.ACTIVE;
   const isSpeaking = true;
   const messages = [
     "Whats your name",
@@ -66,8 +66,8 @@ const Agent = ({ userName }: AgentProps) => {
           <button className="relative btn-call">
             <span
               className={cn(
-                "absolute animate-ping rounded-full opacity-75",
-                (callStatus !== "CONNECTING") & "hidden"
+                "absolute animate-ping rounded-full opacity-75"
+                // (callStatus !== "CONNECTING") & "hidden"
               )}
             />
             <span>
