@@ -154,38 +154,47 @@ End the conversation on a polite and positive note.
   },
 };
 
+// constants/index.ts (Corrected Schema)
+
 export const feedbackSchema = z.object({
-  totalScore: z.number(),
-  categoryScores: z.tuple([
-    z.object({
-      name: z.literal("Communication Skills"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Technical Knowledge"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Problem Solving"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Cultural Fit"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Confidence and Clarity"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-  ]),
-  strengths: z.array(z.string()),
-  areasForImprovement: z.array(z.string()),
-  finalAssessment: z.string(),
+  totalScore: z
+    .number()
+    .describe("Overall score for the candidate from 0 to 100."),
+  categoryScores: z
+    .object({
+      "Communication Skills": z.object({
+        score: z.number(),
+        comment: z.string(),
+      }),
+      "Technical Knowledge": z.object({
+        score: z.number(),
+        comment: z.string(),
+      }),
+      "Problem Solving": z.object({ score: z.number(), comment: z.string() }),
+      "Cultural Fit": z.object({ score: z.number(), comment: z.string() }),
+      "Confidence and Clarity": z.object({
+        score: z.number(),
+        comment: z.string(),
+      }),
+    })
+    .describe(
+      "An object where each key is a category and the value contains its score and comment."
+    ),
+  strengths: z
+    .string()
+    .describe(
+      "A list of the candidate's strengths, with each strength separated by a newline character (\\n)."
+    ),
+  areasForImprovement: z
+    .string()
+    .describe(
+      "A list of the candidate's areas for improvement, with each item separated by a newline character (\\n)."
+    ),
+  finalAssessment: z
+    .string()
+    .describe(
+      "A final, detailed summary and assessment of the candidate's performance."
+    ),
 });
 
 export const interviewCovers = [
