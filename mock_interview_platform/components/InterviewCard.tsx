@@ -18,8 +18,6 @@ const InterviewCard = async ({
     userId && id
       ? await getFeedbackByInterviewId({ interviewId: id, userId })
       : null;
-  console.log(feedback);
-  console.log("Passed userId to InterviewCard:", userId);
   const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
   const formatedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()

@@ -4,7 +4,7 @@ import { db, auth } from "@/firebase/admin";
 import { doc } from "firebase/firestore";
 import { cookies } from "next/headers";
 
-const ONE_WEEK = 60 * 60 * 24 * 7;
+const TEN_MIN = 60 * 10;
 
 export async function signUp(params: SignUpParams) {
   const { uid, name, email } = params;
@@ -60,10 +60,10 @@ export async function signIn(params: SignInParams) {
 export async function setSessionCookie(idToken: string) {
   const cookieStore = await cookies();
   const sessionCookie = await auth.createSessionCookie(idToken, {
-    expiresIn: ONE_WEEK * 1000,
+    expiresIn: TEN_MIN * 1000,
   });
   cookieStore.set("session", sessionCookie, {
-    maxAge: ONE_WEEK,
+    maxAge: TEN_MIN,
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     path: "/",
